@@ -6,6 +6,10 @@ on:
     tags: [ 'v*' ]
   workflow_dispatch:
 
+# Release'e APK ekleyebilmek icin yazma izni gerekiyor
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
