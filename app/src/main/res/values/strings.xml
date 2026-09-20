@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Roblox Güncel</string>
+    <string name="subtitle">Roblox son sürümü tek dokunuşla</string>
+    <string name="installed_label">TELEFONDA YÜKLÜ</string>
+    <string name="latest_label">SON SÜRÜM</string>
+    <string name="dots">…</string>
+    <string name="source_label">Kaynak: %1$s</string>
+    <string name="not_installed">Roblox yüklü değil</string>
+    <string name="not_installed_value">—</string>
+    <string name="update_available">Güncelleme var!</string>
+    <string name="up_to_date">Güncelsin ✓</string>
+    <string name="status_error">Sürüm alınamadı</string>
+    <string name="error_detail">Hiçbir kaynaktan sürüm bilgisi alınamadı. Bağlantını kontrol edip Yenile\'ye bas.</string>
+    <string name="download_btn">Son sürümü indir</string>
+    <string name="browser_btn">Tarayıcıda aç</string>
+    <string name="refresh_btn">Yenile</string>
+    <string name="fallback_link">APKMirror Roblox sayfasını aç</string>
+    <string name="download_started">İndirme başladı — bildirimden takip edebilirsin</string>
+    <string name="download_failed">İndirme başlatılamadı</string>
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Beyaz "R" harfi (kendi cizimimiz) -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M40,34h14.5c8.2,0 13.5,4.9 13.5,12c0,5.6 -3.3,9.7 -8.5,11.3L66.5,74h-8.8l-6.4,-15.4H47V74h-7z M47,40.4v11.9h7c4.3,0 7,-2.3 7,-5.9s-2.7,-6 -7,-6z" />
+</vector>
