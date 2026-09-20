@@ -61,64 +61,74 @@ object VersionFetcher {
 
     // --- kaynaklar ----------------------------------------------------------
 
-    private fun fetchFromAppBrain(): Latest? = try {
-        val html = httpGet("https://www.appbrain.com/app/roblox/com.roblox.client") ?: return null
-        val v = firstMatch(
-            html,
-            Pattern.compile(
-                "latest version available is ([0-9]{1,2}\\.[0-9]{1,3}\\.[0-9]{1,5})",
-                Pattern.CASE_INSENSITIVE
-            ),
-            VERSION_IN_TAG
-        ) ?: return null
-        Latest(v, "AppBrain", releaseUrlFor(v))
-    } catch (e: Exception) {
-        null
-    }
-
-    private fun fetchFromApkCombo(): Latest? = try {
-        val html = httpGet("https://apkcombo.com/roblox/com.roblox.client/") ?: return null
-        val v = firstMatch(
-            html,
-            Pattern.compile(
-                "Roblox APK ([0-9]{1,2}\\.[0-9]{1,3}\\.[0-9]{1,5})",
-                Pattern.CASE_INSENSITIVE
-            ),
-            VERSION_IN_TAG
-        ) ?: return null
-        Latest(v, "APKCombo", releaseUrlFor(v))
-    } catch (e: Exception) {
-        null
-    }
-
-    private fun fetchFromApkMirrorRss(): Latest? = try {
-        for (page in 1..3) {
-            val xml = httpGet("https://www.apkmirror.com/feed/?paged=$page") ?: continue
-            val m = Pattern.compile(
-                "apk/roblox-corporation/roblox/roblox-([0-9]{1,2})-([0-9]{1,4})-([0-9]{1,6})-release/"
-            ).matcher(xml)
-            if (m.find()) {
-                val v = "${m.group(1)}.${m.group(2)}.${m.group(3)}"
-                val url = APKMIRROR_ROBLOX_BASE + m.group().removePrefix("apk/")
-                return Latest(v, "APKMirror", url)
-            }
+    private fun fetchFromAppBrain(): Latest? {
+        return try {
+            val html = httpGet("https://www.appbrain.com/app/roblox/com.roblox.client")
+                ?: return null
+            val v = firstMatch(
+                html,
+                Pattern.compile(
+                    "latest version available is ([0-9]{1,2}\\.[0-9]{1,3}\\.[0-9]{1,5})",
+                    Pattern.CASE_INSENSITIVE
+                ),
+                VERSION_IN_TAG
+            ) ?: return null
+            Latest(v, "AppBrain", releaseUrlFor(v))
+        } catch (e: Exception) {
+            null
         }
-        null
-    } catch (e: Exception) {
-        null
     }
 
-    private fun fetchFromPlayStore(): Latest? = try {
-        val html = httpGet(
-            "https://play.google.com/store/apps/details?id=com.roblox.client&hl=en"
-        ) ?: return null
-        val v = firstMatch(
-            html,
-            Pattern.compile("\"([0-9]{1,2}\\.[0-9]{1,3}\\.[0-9]{1,5})\"")
-        ) ?: return null
-        Latest(v, "Google Play", releaseUrlFor(v))
-    } catch (e: Exception) {
-        null
+    private fun fetchFromApkCombo(): Latest? {
+        return try {
+            val html = httpGet("https://apkcombo.com/roblox/com.roblox.client/")
+                ?: return null
+            val v = firstMatch(
+                html,
+                Pattern.compile(
+                    "Roblox APK ([0-9]{1,2}\\.[0-9]{1,3}\\.[0-9]{1,5})",
+                    Pattern.CASE_INSENSITIVE
+                ),
+                VERSION_IN_TAG
+            ) ?: return null
+            Latest(v, "APKCombo", releaseUrlFor(v))
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    private fun fetchFromApkMirrorRss(): Latest? {
+        return try {
+            for (page in 1..3) {
+                val xml = httpGet("https://www.apkmirror.com/feed/?paged=$page") ?: continue
+                val m = Pattern.compile(
+                    "apk/roblox-corporation/roblox/roblox-([0-9]{1,2})-([0-9]{1,4})-([0-9]{1,6})-release/"
+                ).matcher(xml)
+                if (m.find()) {
+                    val v = "${m.group(1)}.${m.group(2)}.${m.group(3)}"
+                    val url = APKMIRROR_ROBLOX_BASE + m.group().removePrefix("apk/")
+                    return Latest(v, "APKMirror", url)
+                }
+            }
+            null
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    private fun fetchFromPlayStore(): Latest? {
+        return try {
+            val html = httpGet(
+                "https://play.google.com/store/apps/details?id=com.roblox.client&hl=en"
+            ) ?: return null
+            val v = firstMatch(
+                html,
+                Pattern.compile("\"([0-9]{1,2}\\.[0-9]{1,3}\\.[0-9]{1,5})\"")
+            ) ?: return null
+            Latest(v, "Google Play", releaseUrlFor(v))
+        } catch (e: Exception) {
+            null
+        }
     }
 
     // --- yardimcilar ----------------------------------------------------------

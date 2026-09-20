@@ -138,7 +138,7 @@ class WebViewActivity : AppCompatActivity() {
                 .let { if (it.endsWith(".bin")) "roblox-$versionName.apk" else it }
 
             val request = DownloadManager.Request(Uri.parse(url)).apply {
-                setRequestProperty("User-Agent", userAgent)
+                addRequestHeader("User-Agent", userAgent)
                 setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
                 setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName)
                 setMimeType("application/vnd.android.package-archive")
